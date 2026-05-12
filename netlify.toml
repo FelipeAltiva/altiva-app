@@ -1,0 +1,22 @@
+[[redirects]]
+  from = "/proxy/census/*"
+  to = "https://geocoding.geo.census.gov/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/proxy/massgis/*"
+  to = "https://services1.arcgis.com/hGdibHYSPO59RG1h/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/proxy/fema/*"
+  to = "https://hazards.fema.gov/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
