@@ -1,6 +1,5 @@
-// MassGIS Level 3 Parcels – public ArcGIS Online FeatureServer, no auth required
-const PARCELS_URL =
-  '/proxy/massgis/arcgis/rest/services/L3_TAXPAR_POLY_ASSESS_gdb/FeatureServer/0/query';
+// MassGIS Level 3 Parcels – proxied via Netlify Function to avoid CORS
+const PARCELS_URL = '/.netlify/functions/proxy-massgis';
 
 export async function fetchParcelData(lat, lng) {
   const geometry = JSON.stringify({

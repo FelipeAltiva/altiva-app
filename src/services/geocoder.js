@@ -7,7 +7,7 @@ export async function geocodeAddress(address) {
 
   let data;
   try {
-    const res = await fetch(`/proxy/census/geocoder/locations/onelineaddress?${params}`);
+    const res = await fetch(`/.netlify/functions/proxy-census?${params}`);
     if (!res.ok) throw new Error(`Census geocoder HTTP ${res.status}`);
     data = await res.json();
   } catch (err) {

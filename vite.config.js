@@ -5,20 +5,21 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/proxy/census': {
+      // Simulate Netlify Functions in local dev
+      '/.netlify/functions/proxy-census': {
         target: 'https://geocoding.geo.census.gov',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/proxy\/census/, ''),
+        rewrite: () => '/geocoder/locations/onelineaddress',
       },
-      '/proxy/massgis': {
-        target: 'https://services1.arcgis.com/hGdibHYSPO59RG1h',
+      '/.netlify/functions/proxy-massgis': {
+        target: 'https://services1.arcgis.com',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/proxy\/massgis/, ''),
+        rewrite: () => '/hGdibHYSPO59RG1h/arcgis/rest/services/L3_TAXPAR_POLY_ASSESS_gdb/FeatureServer/0/query',
       },
-      '/proxy/fema': {
+      '/.netlify/functions/proxy-fema': {
         target: 'https://hazards.fema.gov',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/proxy\/fema/, ''),
+        rewrite: () => '/arcgis/rest/services/public/NFHL/MapServer/28/query',
       },
     },
   },
