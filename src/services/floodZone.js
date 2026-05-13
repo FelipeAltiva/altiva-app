@@ -1,4 +1,5 @@
-const NFHL_URL = '/.netlify/functions/proxy-fema';
+const NFHL_URL =
+  'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query';
 
 const ZONE_DESCRIPTIONS = {
   A: 'Special Flood Hazard Area – 1% annual chance flood (Zone A)',

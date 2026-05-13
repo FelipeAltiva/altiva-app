@@ -1,5 +1,6 @@
-// MassGIS Level 3 Parcels – proxied via Netlify Function to avoid CORS
-const PARCELS_URL = '/.netlify/functions/proxy-massgis';
+// MassGIS Level 3 Parcels – ArcGIS Online, public endpoint with CORS enabled
+const PARCELS_URL =
+  'https://services1.arcgis.com/hGdibHYSPO59RG1h/arcgis/rest/services/L3_TAXPAR_POLY_ASSESS_gdb/FeatureServer/0/query';
 
 export async function fetchParcelData(lat, lng) {
   const geometry = JSON.stringify({
@@ -18,14 +19,13 @@ export async function fetchParcelData(lat, lng) {
     f: 'json',
   });
 
-  const fetchUrl = `${PARCELS_URL}?${params}`;
   let data;
   try {
-    const res = await fetch(fetchUrl);
+    const res = await fetch(`${PARCELS_URL}?${params}`);
     if (!res.ok) throw new Error(`MassGIS HTTP ${res.status}`);
     data = await res.json();
   } catch (err) {
-    throw new Error(`[MassGIS] ${err.message} (fetching: ${fetchUrl.slice(0, 80)})`);
+    throw new Error(`[MassGIS] ${err.message}`);
   }
 
   if (data.error) {
