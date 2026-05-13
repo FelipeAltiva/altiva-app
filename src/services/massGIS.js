@@ -18,13 +18,14 @@ export async function fetchParcelData(lat, lng) {
     f: 'json',
   });
 
+  const fetchUrl = `${PARCELS_URL}?${params}`;
   let data;
   try {
-    const res = await fetch(`${PARCELS_URL}?${params}`);
+    const res = await fetch(fetchUrl);
     if (!res.ok) throw new Error(`MassGIS HTTP ${res.status}`);
     data = await res.json();
   } catch (err) {
-    throw new Error(`[MassGIS] ${err.message}`);
+    throw new Error(`[MassGIS] ${err.message} (fetching: ${fetchUrl.slice(0, 80)})`);
   }
 
   if (data.error) {
